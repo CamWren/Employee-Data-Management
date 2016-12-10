@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+  <html lang="en-us">   
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Data-Management</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+</head>
+<body>
+
+  <div class="container">
+  <br>
+
+
+  <!--jumbotron -->
+  <div class="jumbotron">
+    <h1 class="text-center">Employee-Data Management</h1>
+    <h3 class="text-center">A Comprehensive Directory of Employee Billable Hours</h3>
+  </div>
+
+  <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Current Employee</h3>
+            </div>
+            <div class="panel-body">
+            <table class="table">
+               <thead>
+                 <tr>
+                   
+                   <th>Employee Name</th>
+                   <th>Role</th>
+                   <th>Start Date</th>
+                   <th>Months Worked</th>
+                   <th>Monthly Rate ($)</th>
+                   <th>Total Billed ($)</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td id="employeeName"></td>
+                   <td id="role"></td>
+                   <td id="startDate"></td>
+                   <td id="monsWorked"></td>
+                   <td id="monsRate"></td>
+                   <td id="billed"></td>
+                 </tr>
+               </tbody>
+             </table>
+        
+            </div>
+          </div>
+        <!-- Sign-Up Panel-->
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Add Employee</h3>
+            </div>
+            <div class="panel-body">
+
+              <!-- Sign-up Form (note the various input "types")-->
+              <form role="form">
+                <div class="form-group">
+                  <label for="name-input">Employee Name:</label>
+                  <input class="form-control" id="name-input" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="role-input">Role:</label>
+                  <input class="form-control" id="role-input" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="startDate-input">Start Date (DD/MM/YY - ex: 01/01/89:)</label>
+                  <input class="form-control" id="startDate-input" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="rate-input">Monthly Rate:</label>
+                  <input class="form-control" id="rate-input" ></input>
+                </div>
+                <button class="btn btn-default" id="add-user" type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+
+  <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+
+    <!-- LINK TO FIREBASE GOES HERE -->
+<script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDcbHC98VLdHnejork9NZjGpffsfLNjJFY",
+    authDomain: "employee-data-management-313b6.firebaseapp.com",
+    databaseURL: "https://employee-data-management-313b6.firebaseio.com",
+    storageBucket: "employee-data-management-313b6.appspot.com",
+    messagingSenderId: "466593402749"
+  };
+  firebase.initializeApp(config);
+
+
+            // Create a variable to reference the database
+      var database = firebase.database();
+
+
+      // initial values
+
+      var name = "";
+      var role= ""; 
+      var startDate = "";
+      var rate = 0;
+
+             // Capture Button Click
+      $("#add-user").on("click", function() {
+
+
+
+        name = $("#name-input").val().trim();
+      role = $("#role-input").val().trim();
+        startDate = $("#startDate-input").val().trim();
+        rate = $("#rate-input").val().trim();
+
+                database.ref().push({
+          name: name,
+          role: role,
+          startDate: startDate,
+          rate: rate
+        });
+
+
+                console.log(name);
+console.log(role);
+console.log(startDate);
+console.log(rate);
+
+
+
+
+        // Don't refresh the page!
+        return false;
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>
